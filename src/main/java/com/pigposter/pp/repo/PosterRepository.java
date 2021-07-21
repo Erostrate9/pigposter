@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import com.pigposter.pp.model.*;
 public interface PosterRepository extends JpaRepository<Poster,Integer>{
     Poster findPostersByUser(User user);
-    Poster findPostersByTag(Tag tag);
+    
 }

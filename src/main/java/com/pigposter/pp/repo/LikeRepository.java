@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import com.pigposter.pp.model.*;
 public interface LikeRepository extends JpaRepository<Like,Integer>{
     Like findLikesByUser(User user);
-    Like findLikesByPoster(Poster poster);
+    Like findLikesByPid(Poster poster);
 }

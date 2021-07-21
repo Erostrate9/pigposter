@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import com.pigposter.pp.model.*;
 public interface CommentRepository extends JpaRepository<Comment,Integer>{
     Comment findCommentsByUser(User user);
-    Comment findCommentsByPoster(Poster poster);
+    Comment findCommentsByPid(Poster poster);
 }
