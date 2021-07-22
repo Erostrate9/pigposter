@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <title>PigPoster-登陆</title>
+    <script>
+        function a()
+        {
+            document.getElementById("btn_login").style.background="#B2DFFC";
+            setTimeout(function (){document.getElementById("btn_login").style.background="#0095f6";},100);
+            $.ajax({
+                url: "/cookie/",
+                type: "get",
+                data:{
+                    "username":$("#ip_id").val(),
+                    "password":$("#ip_pwd").val()
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+                })
+        }
+    </script>
+</head>
+<style>
+    @font-face {
+        font-family: msyh;
+        src: url('/static/font/msyh.ttc'),
+        url("../static/font/msyhbd.ttc"),
+        url("../static/font/msyhl.ttc");
+    }
+    body{
+        width: 1024px;
+        height: 509px;
+        background: #FAFAFA;
+    }
+    .fullcard{
+        width: 263px;
+        height: 284px;
+        background: #FFFFFF;
+        margin-top: 78px;
+        border-color: #E6E6E6;
+        border-style:solid;
+        border-width: 1px;
+        position: absolute;
+        left: 50%;
+        margin-left:-130px;
+        font-family: msyh;
+    }
+    .title{
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    input::-webkit-input-placeholder{
+        color:#9E9791;
+        font-family: msyh;
+        font-size:12px;
+    }
+    input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+        color:#9E9791;
+        font-family: msyh;
+        font-size:12px;
+    }
+    input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+        color:#9E9791;
+        font-family: msyh;
+        font-size:12px;
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color:#9E9791;
+        font-family: msyh;
+        font-size:12px;
+    }
+    .btn{
+        background: #0095f6;
+        width:201px;
+        height:22px;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        border-style: solid;
+        border-color:transparent;
+        border-radius: 5px;
+        font-family: msyh;
+        color:white;
+        vertical-align:middle;
+        text-align: center;
+        line-height: 11px;
+        cursor: pointer;
+    }
+    #btn_login{
+        margin-top: 12px;
+        font-weight:bold;
+    }
+    .ip{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        background: #FAFAFA;
+        border-color: #DFDFDF;
+        border-style: solid;
+        border-width: 1px;
+        width: 200px;
+        height: 28px;
+    }
+    #ip_id{
+        margin-top: 25px;
+    }
+    #ip_pwd{
+        margin-top: 5px;
+    }
+    .bottom{
+        font-family: msyh;
+        font-size: 12px;
+        width:263px;
+        height:41px;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        border-top:1px solid #E6E6E6;
+        line-height: 40px;
+    }
+</style>
+<body>
+<div class="fullcard">
+    <div class="title">
+        <img src="/img/pigposter.svg" width="162px" height="41px" />
+    </div>
+    <input class="ip" id="ip_id" type="text" placeholder="电子邮箱或用户名"></input>
+    <input class="ip" id="ip_pwd"  type="password" placeholder="密码" ></input>
+    <button class="btn" id="btn_login" onclick="a()">登陆</button>
+    <div class="bottom">没有账号吗？<a href="/route/register" target="_parent">注册</a></div>
+</div>
+</body>
+
+</html>

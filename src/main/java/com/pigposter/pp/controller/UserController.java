@@ -23,17 +23,20 @@ public class UserController {
     BindRepository abr;
     @Autowired
     WorkSheetRepository wsr;
+    @Autowired
+    FollowRepository flr;
     @GetMapping("/login")
     public Account login(String username,String password) throws Exception
     {
         return acr.findAccountByUsernameAndPassword(cookie.invParse(username),cookie.invParse(password));
     }
     @GetMapping("/register")
-    public void register(String username,String password)
+    public String register(@RequestParam("username")String username,
+    @RequestParam("password")String password,@RequestParam("nick")String nick)
     {
         User u = new User();
         u.setAvatar(new Avatar());
-        u.setEmail("");
+        u.setEmail(nick);
         u.setGender(0);
         u.setMotto("I HAVE BEEN CALLED. I MUST ANSWER.ALWAYS");
         u.setPower(1);
@@ -44,6 +47,7 @@ public class UserController {
         a.setUser(u);
         a.setUsername(username);
         acr.save(a);
+        return username+" "+password+" "+nick;
     }
     @GetMapping("/profile")
     public Account getProfile(@CookieValue(value="unm",defaultValue = "")String username
@@ -97,6 +101,14 @@ public class UserController {
         abr.save(b);
         return "ok";
     }
+    @GetMapping("/getbind")
+    public List<Bind> getbind(@CookieValue(value="unm",defaultValue = "")String username
+    ,@CookieValue(value="ppp",defaultValue = "")String password)throws Exception
+    {
+        Account ac = login(username, password);
+        if(ac == null) return new ArrayList<Bind>();
+        return abr.findBindsByUser(ac.getUser());
+    }
     @GetMapping("/up")
     public String up(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
@@ -111,4 +123,35 @@ public class UserController {
         wsr.save(ws);
         return "ok";
     }
+    @GetMapping("/following")
+    public List<User> following(
+    @CookieValue(value="unm",defaultValue = "")String username
+    ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
+    {
+        Account ac = login(username,password);
+        if(ac == null) return new ArrayList<User>();
+        List<Follow> f= flr.findFollowsByFollower(ac.getUser());
+        List<User> u = new ArrayList<User>();
+        for(int i = 0;i < f.size();i++)
+        {
+            u.add(f.get(i).getFollowee());
+        }
+        return u;
+    }
+    @GetMapping("/follower")
+    public List<User> follower(
+    @CookieValue(value="unm",defaultValue = "")String username
+    ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
+    {
+        Account ac = login(username,password);
+        if(ac == null) return new ArrayList<User>();
+        List<Follow> f= flr.findFollowsByFollowee(ac.getUser());
+        List<User> u = new ArrayList<User>();
+        for(int i = 0;i < f.size();i++)
+        {
+            u.add(f.get(i).getFollower());
+        }
+        return u;
+    }
+    
 }

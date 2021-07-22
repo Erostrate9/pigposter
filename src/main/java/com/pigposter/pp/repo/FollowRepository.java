@@ -3,7 +3,8 @@ package com.pigposter.pp.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.pigposter.pp.model.*;
+import java.util.*;
 public interface FollowRepository extends JpaRepository<Follow,Integer>{
-    Follow findFollowsByFollowee(User user);
-    Follow findFollowsByFollower(User user);
+    List<Follow> findFollowsByFollowee(User user);
+    List<Follow> findFollowsByFollower(User user);
 }
