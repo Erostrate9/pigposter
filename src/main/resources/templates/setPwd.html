@@ -58,24 +58,11 @@
                 <div class="valueinputbox"><input class="valueinput" type="password"></div>
             </div>
             </div>
-        </div>
         <button type="button" class="layui-btn" id="submit" style="margin-left: 135px;margin-top: 20px;background: #0095F6;color: white">提交</button>
+        </div>
+
     </div>
 
-</div>
-<script>
-    var upload = layui.upload; //得到 upload 对象
-    //创建一个上传组件
-    upload.render({
-        elem: '#setAvatar'
-        ,url: ''
-        ,done: function(res, index, upload){ //上传后的回调
-        }
-        ,accept: 'images' //允许上传的文件类型
-        //,size: 50 //最大允许上传的文件大小
-        //,……
-    })
-</script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){

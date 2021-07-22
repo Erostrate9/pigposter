@@ -2,9 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>认证商家用户</title>
+    <style></style>
+    <link rel="stylesheet" href="../static/css/my.css" media="all">
+    <link rel="stylesheet" href="../static/css/layui.css" media="all">
 </head>
-<body>
+<body id="abc">
+<div class="bar">
+    <img src="../static/icon/pigposter.svg" width="117px" height="36px" style="position: relative;left:10%;display: inline"/>
+    <div style="background: #FAFAFA;width: 142px;height: 19px;text-align: center;border-style: solid;border-color: #EAEAEA;border-radius: 2px;border-width:1px;display: inline-block;position: absolute;left:40%;bottom: 20%;">
+        <img src="../static/icon/搜索.svg" style="width: 11px;height: 11px;position: relative;margin: 0 auto;">
+        <input style="background: #FAFAFA;width: 119px;height: 13px;position:relative;margin: 0 auto;display: inline;border-style: hidden;font-family: msyh;font-size: 10px;line-height: 0" id="srch" PLACEHOLDER="搜索">
+    </div>
+    <div style="width: 92px;height: 19px;border-style: hidden;text-align: center;position: absolute;right:10%;bottom: 20%;display: inline-block">
+        <a href="http://www.baidu.com" target="_parent"><img src="../static/icon/首页.svg" class="icon"></a>
+        <a href="http://www.baidu.com" target="_parent"><img src="../static/icon/热门.svg"  class="icon"></a>
+        <img src="../static/icon/消息.svg"  class="icon">
+        <a href="http://www.baidu.com" target="_parent"><div class="avatarFrame"><img src="../static/pic/me.jpg"  class="avatar" id="myAvatar"></div></a>
+    </div>
+</div>
+<div class="setFrame">
+    <div class="setlbox">
+        <div class="navbox">
+            <ul class="layui-nav layui-nav-tree layui-bg-blue" lay-filter="setnav">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item"><a href="">编辑个人资料</a></li>
+                <li class="layui-nav-item"><a href="">更改密码</a></li>
+                <li class="layui-nav-item"><a href="">绑定第三方平台</a></li>
+                <li class="layui-nav-item"><a href="">认证商家用户</a></li>
+            </ul>
+        </div>
+        <div class="setfoot">
+            账号管理中心
+        </div>
+    </div>
+    <div class="setrbox">
+        <div class="setvaluebox">
+            <div class="avatarFrame" style="width: 30px;height: 30px;border-radius: 15px"><img src="../static/pic/me.jpg"  class="avatar" style="width: 30px">
+            </div>
+        </div>
+        <div class="setvaluebox">
+            <div class="valuelabel">机构名称</div>
+            <div class="valueinputbox"><input class="valueinput"></div>
+        </div>
+        <div class="setvaluebox">
+            <div class="valuelabel">负责人姓名</div>
+            <div class="valueinputbox"><input class="valueinput"></div>
+        </div>
+        <div class="setvaluebox">
+            <div class="valuelabel">联系电话</div>
+            <div class="valueinputbox"><input class="valueinput"></div>
+        </div>
+        <button type="button" class="layui-btn" id="submit" style="margin-left: 135px;margin-top: 20px;background: #0095F6;color: white">提交</button>
+    </div>
 
+</div>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+        element.render('nav',{
+            background:'red'
+        })
+        //…
+    });
+</script>
 </body>
 </html>
