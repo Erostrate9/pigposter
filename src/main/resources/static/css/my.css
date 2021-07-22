@@ -1,0 +1,128 @@
+@font-face {
+    font-family: msyh;
+    src: url('../font/msyh.ttc'),
+    url("../font/msyhbd.ttc"),
+    url("../font/msyhl.ttc");
+}
+body{
+    width: 1024px;
+    height: 509px;
+    background: #FAFAFA;
+    margin:0;
+    padding:0;
+    font-family: msyh;
+}
+span,p,div{
+    font-family: msyh;
+}
+.bar{
+    background: #FFFFFF;
+    border-style: solid;
+    border-bottom-color: #EAEAEA;
+    border-bottom-width: 1px;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    margin-top: 0;
+    width: 100%;
+    height: 37px;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+.icon{
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+}
+.avatarFrame{
+    border-radius: 9px;
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+}
+.avatar{
+    border-style: hidden;
+    width: 18px;
+}
+.setFrame{
+    background: white;
+    width:617px;
+    height: 368px;
+    border: solid #797979 1px;
+    margin-left: 178px;
+    margin-top: 56px;
+}
+.setlbox{
+    vertical-align: top;
+    background: white;
+    border-right:solid #797979 1px;
+    width:157px;
+    height: 368px;
+    display: inline-block;
+}
+.navbox{
+    overflow: hidden;
+    width: 157px;
+    height: 302px;
+    display: block;
+    border-bottom:solid #797979 1px;
+}
+.setfoot{
+    display: block;
+    height: 64px;
+    width: 157px;
+    font-size:10px;
+    color:#2E9FF6;
+    text-align: center;
+    line-height:7;
+}
+.setrbox{
+    vertical-align: top;
+    background: white;
+    display: inline-block;
+}
+.setvaluebox{
+    vertical-align: center;
+    display: block;
+    height: 28px;
+    width: 355px;
+    margin-left: 75px;
+    margin-top: 20px;
+}
+.valuelabel{
+    font-size:12px;
+    font-weight:bold;
+    width:60px;
+    height: 11px;
+    display: inline-block;
+}
+.valueinputbox{
+    width: 290px;
+    height: 27px;
+    display: inline-block;
+}
+.valueinput{
+    width: 290px;
+    height: 27px;
+    border: solid #797979 1px;
+}
+.btn{
+    background: #0095f6;
+    width:201px;
+    height:22px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    border-style: solid;
+    border-color:transparent;
+    border-radius: 5px;
+    font-family: msyh;
+    color:white;
+    vertical-align:middle;
+    text-align: center;
+    line-height: 11px;
+    cursor: pointer;
+}
