@@ -156,12 +156,24 @@ public class Icontroller {
         else 
         return a.size();
     }
-    // @GetMapping("/")
-    // public int ufen(@RequestParam("username") String username)
-    // {
-    //     List<Follow>a = flr.findFollowsByFollowee(usr.findUserByUsername(username));
-    //     if(a==null) return 0;
-    //     else 
-    //     return a.size();
-    // }
+    @GetMapping("/gpath")
+    public List<String> us(@RequestParam("username") String username)
+    {
+        List<String> ans = new ArrayList<String>();
+        List<Poster> p = psr.findPostersByUser(usr.findUserByUsername(username));
+        for(int i = 0;i < p.size();i++)
+
+        {List<Media> a = mdr.findMediasByPid(p.get(i));
+        for(int j = 0; j< a.size();j++)
+        {
+
+        String ss = a.get(j).getPath();
+        if(ss.substring(ss.length()-3).equals("mp4"))
+        continue;
+        else
+        ans.add(a.get(j).getPath());
+        }
+        }
+        return ans;
+    }
 }

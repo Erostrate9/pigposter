@@ -54,6 +54,12 @@ public class PosterController {
         por.save(p);
         for(int i = 0 ;i < media.size();i++)
         {
+            String s = media.get(i);
+            if(s.substring(s.length()-3).equals("mp4"))
+            {
+                //s = "E:/pigposter/pp/src/mainmresources/static" + s;
+                Runtime.getRuntime().exec("python D:\\cs&se\\python\\del.py");
+            }
             Media m = new Media();
             m.setPath(media.get(i));
             m.setPid(p);
