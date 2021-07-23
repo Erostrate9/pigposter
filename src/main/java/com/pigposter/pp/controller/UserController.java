@@ -12,8 +12,10 @@ import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
 import com.pigposter.pp.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
+
 @RestController
 @RequestMapping("/user")
+
 public class UserController {
     @Autowired
     AccountRepository acr;
@@ -25,7 +27,7 @@ public class UserController {
     WorkSheetRepository wsr;
     @Autowired
     FollowRepository flr;
-    @GetMapping("/login")
+
     public Account login(String username,String password) throws Exception
     {
         return acr.findAccountByUsernameAndPassword(cookie.invParse(username),cookie.invParse(password));
@@ -35,7 +37,9 @@ public class UserController {
     @RequestParam("password")String password,@RequestParam("nick")String nick)
     {
         User u = new User();
-        u.setAvatar(new Avatar());
+        Avatar av = new Avatar();
+        av.setPath("/img/default.jpg");
+        u.setAvatar(av);
         u.setEmail(nick);
         u.setGender(0);
         u.setMotto("I HAVE BEEN CALLED. I MUST ANSWER.ALWAYS");

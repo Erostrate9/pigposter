@@ -1,19 +1,13 @@
-@font-face {
-    font-family: msyh;
-    src: url('../font/msyh.ttc'),
-    url("../font/msyhbd.ttc"),
-    url("../font/msyhl.ttc");
-}
 body{
     width: 1024px;
     height: 509px;
     background: #FAFAFA;
     margin:0;
     padding:0;
-    font-family: msyh;
+    font-family: 微软雅黑;
 }
 span,p,div{
-    font-family: msyh;
+    font-family: 微软雅黑;
 }
 .bar{
     background: #FFFFFF;
@@ -139,7 +133,7 @@ span,p,div{
     border-style: solid;
     border-color:transparent;
     border-radius: 5px;
-    font-family: msyh;
+    font-family: 微软雅黑;
     color:white;
     vertical-align:middle;
     text-align: center;
@@ -156,7 +150,7 @@ span,p,div{
     border-style: solid;
     border-color:transparent;
     border-radius: 5px;
-    font-family: msyh;
+    font-family: 微软雅黑;
     color:white;
     vertical-align:middle;
     text-align: center;
@@ -264,7 +258,7 @@ span,p,div{
     margin-top: 13px;
 }
 .editFrame{
-    height: 119px;
+    height: 250px;
     width: 405px;
     border-style: solid;
     border-radius: 12px;
@@ -280,7 +274,7 @@ textarea{
     width: 340px;
     height: 51px;
     font-size:12px;
-    font-family: msyh;
+    font-family: 微软雅黑;
     border-style: hidden;
 }
 .tag{}

@@ -1,6 +1,8 @@
 package com.pigposter.pp.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/post")
+
 public class PosterController {
     @Autowired
     BindRepository abr;
@@ -29,14 +32,19 @@ public class PosterController {
     TagRepository tgr;
     @Autowired
     FollowRepository flr;
-    UserController uc;
-    @GetMapping("/add")
+    @Autowired
+    AccountRepository acr;
+    public Account login(String username,String password) throws Exception
+    {
+        return acr.findAccountByUsernameAndPassword(cookie.invParse(username),cookie.invParse(password));
+    }
+    @PostMapping("/add")
     public String add(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password,
     @RequestParam(value ="text")String text,@RequestParam(value="tags")List<String>tag
     ,@RequestParam("media")List<String>media) throws Exception
     {
-        Account ac = uc.login(username,password);
+        Account ac = login(username,password);
         if(ac == null) return "bad login";
         User u = ac.getUser();
         Poster p = new Poster();
@@ -66,7 +74,7 @@ public class PosterController {
     ,@CookieValue(value="ppp",defaultValue = "")String password,
     @RequestParam("pid")int pid,@RequestParam("text")String text,@RequestParam("cid")int cid)throws Exception
     {
-        Account ac = uc.login(username,password);
+        Account ac = login(username,password);
         if(ac == null) return "bad login";
         Comment c = new Comment();
         c.setCommentId(cid);
@@ -82,7 +90,7 @@ public class PosterController {
     ,@CookieValue(value="ppp",defaultValue = "")String password,
     @RequestParam("pid")int pid,@RequestParam("cid")int cid)throws Exception
     {
-        Account ac = uc.login(username,password);
+        Account ac = login(username,password);
         if(ac == null) return "bad login";
         Like c = new Like();
         c.setCon(1);
@@ -97,7 +105,7 @@ public class PosterController {
     ,@CookieValue(value="ppp",defaultValue = "")String password,
     @RequestParam("pid")int pid,@RequestParam("cid")int cid)throws Exception
     {
-        Account ac = uc.login(username,password);
+        Account ac = login(username,password);
         if(ac == null) return "bad login";
         Like c = new Like();
         c.setCon(-1);
@@ -111,7 +119,7 @@ public class PosterController {
     public List<Like> liked(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
     {
-        Account ac = uc.login(username, password);
+        Account ac = login(username, password);
         if(ac ==null) return new ArrayList<Like>();
         return lkr.findLikesByUser(ac.getUser());
     }
@@ -119,15 +127,16 @@ public class PosterController {
     public List<Comment> commented(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
     {
-        Account ac = uc.login(username, password);
+        Account ac = login(username, password);
         if(ac ==null) return new ArrayList<Comment>();
         return cor.findCommentsByUser(ac.getUser());
     }
+
     @GetMapping("/fold")
     public String fold(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password,@RequestParam("pid")int pid) throws Exception
     {
-        Account ac = uc.login(username, password);
+        Account ac =login(username, password);
         if(ac == null) return "bad login";
         Poster p = por.findPosterById(pid);
         p.setFold(1);
@@ -138,7 +147,7 @@ public class PosterController {
     public String foldcomment(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password,@RequestParam("cid")int cid) throws Exception
     {
-        Account ac = uc.login(username, password);
+        Account ac = login(username, password);
         if(ac == null) return "bad login";
         Comment p = cor.findCommentById(cid);
         p.setFold(1);
@@ -165,7 +174,8 @@ public class PosterController {
             @Override
             public int compare(Poster a,Poster b)
             {
-                return a.getLikes().size() - b.getLikes().size();
+                return lkr.findLikesByPid(a).size() - lkr.findLikesByPid(b).size();
+                // return a.getLikes().size() - b.getLikes().size();
             }
         });
         return p;
@@ -178,7 +188,7 @@ public class PosterController {
         List<Poster> p= por.findAll();
         for(int i = 0;i < p.size();i++)
         {
-            List<Tag> t = p.get(i).getTags();
+            List<Tag> t = tgr.findTagsByPid(p.get(i));
             int f = 0;
             for(int j = 0; j< t.size();j++)
             {

@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javafx.geometry.Pos;
 import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
-
+ 
 import com.pigposter.pp.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 @RestController
 @RequestMapping("/i")
+
+
 public class Icontroller {
     @Autowired
     AccountRepository acr;
@@ -30,13 +32,22 @@ public class Icontroller {
     UserRepository usr;
     @Autowired
     PosterRepository psr;
-    
-    UserController uc;
+    @Autowired
+    LikeRepository lkr;
+    @Autowired
+    CommentRepository cmr;
+    @Autowired
+    MediaRepository mdr;
+    public Account login(String username,String password) throws Exception
+    {
+        return acr.findAccountByUsernameAndPassword(cookie.invParse(username),cookie.invParse(password));
+    }
+    UserController uc = new UserController();
     @GetMapping("/follow")
     public String follow(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password,@RequestParam("fol")String fol) throws Exception
     {
-        Account ac = uc.login(username, password);
+        Account ac = login(username, password);
         if(ac == null) return "bad login";
         Follow f = new Follow();
         f.setFollower(ac.getUser());
@@ -54,28 +65,103 @@ public class Icontroller {
     {
         return psr.findPostersByUser(usr.findUserByUsername(username));
     }
-    @GetMapping("/myView")
+    @GetMapping("/following")
+    public List<User> following(
+    @CookieValue(value="unm",defaultValue = "")String username
+    ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
+    {
+        Account ac = login(username,password);
+        if(ac == null) return new ArrayList<User>();
+        List<Follow> f= flr.findFollowsByFollower(ac.getUser());
+        List<User> u = new ArrayList<User>();
+        for(int i = 0;i < f.size();i++)
+        {
+            u.add(f.get(i).getFollowee());
+        }
+        return u;
+    }
+    @GetMapping("/myview")
     public List<Poster> myview(@CookieValue(value="unm",defaultValue = "")String username
     ,@CookieValue(value="ppp",defaultValue = "")String password) throws Exception
     {
-        Account ac = uc.login(username, password);
+        Account ac = login(username, password);
+        //uc.login(username, password);
         if(ac ==null) return new ArrayList<Poster>();
-        List<User> u = uc.following(username, password);
+        List<User> u = following(username, password);
         List<Poster> p = new ArrayList<Poster>();
         for(int i = 0;i < u.size();i++)
         {
             p.addAll(timeline(u.get(i).getUsername()));
         }
-        Collections.sort(p,new Comparator<Poster>()
-        {
-            @Override
-            public int compare(Poster a,Poster b)
-            {
-                Integer date = Integer.valueOf(String.valueOf(a.getTime()).substring(0, 10));
-                Integer date2 = Integer.valueOf(String.valueOf(b.getTime()).substring(0, 10));
-                return date.intValue() - date2.intValue();
-            }
-        });
+        // Collections.sort(p,new Comparator<Poster>()
+        // {
+        //     @Override
+        //     public int compare(Poster a,Poster b)
+        //     {
+        //         Integer date = Integer.valueOf(String.valueOf(a.getTime()).substring(0, 10));
+        //         Integer date2 = Integer.valueOf(String.valueOf(b.getTime()).substring(0, 10));
+        //         return date.intValue() - date2.intValue();
+        //     }
+        // });
+        // Date d = new Date();
+        // d.setTime(0);
+        // List<Poster> pro = psr.findPostersByTime(d);
+        // Collections.shuffle(pro);
+        // for(int i = 0;i < (pro.size()<10?pro.size():10);i++) 
+        // {
+        //     if(i+10 >= p.size()) break;
+        //     p.add(i+10,pro.get(i));
+        // }
         return p;
     }
+    @GetMapping("/getlike")
+    public List<Like> getlick(int pid)
+    {
+        Poster p = psr.findPosterById(pid);
+        return lkr.findLikesByPid(p);
+    }
+    @GetMapping("/getmedia")
+    public List<Media> getmedia(int pid)
+    {
+        Poster p = psr.findPosterById(pid);
+        return mdr.findMediasByPid(p);
+    }
+    @GetMapping("/getcomment")
+    public List<Comment> getcomment(int pid)
+    {
+        Poster p = psr.findPosterById(pid);
+        return cmr.findCommentsByPid(p);
+    }
+    @GetMapping("/upn")
+    public int upn(@RequestParam("username") String username)
+    {
+        List<Poster>a = psr.findPostersByUser(usr.findUserByUsername(username));
+        if(a==null) return 0;
+        else 
+        return a.size();
+    }
+    @GetMapping("/ufollowing")
+    public int ufn(@RequestParam("username") String username)
+    {
+        List<Follow>a = flr.findFollowsByFollower(usr.findUserByUsername(username));
+        if(a==null) return 0;
+        else 
+        return a.size();
+    }
+    @GetMapping("/ufollower")
+    public int ufen(@RequestParam("username") String username)
+    {
+        List<Follow>a = flr.findFollowsByFollowee(usr.findUserByUsername(username));
+        if(a==null) return 0;
+        else 
+        return a.size();
+    }
+    // @GetMapping("/")
+    // public int ufen(@RequestParam("username") String username)
+    // {
+    //     List<Follow>a = flr.findFollowsByFollowee(usr.findUserByUsername(username));
+    //     if(a==null) return 0;
+    //     else 
+    //     return a.size();
+    // }
 }

@@ -11,10 +11,14 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.pigposter.pp.repo.*;
 import com.fasterxml.jackson.annotation.*;   
-import org.springframework.web.multipart.MultipartFile;                    
+import org.springframework.web.multipart.MultipartFile;
+
+                  
 @RestController
 @RequestMapping("/file")
+
 public class FileController {
+    
     @PostMapping("/upload")
     public List<String> httpUpload(@RequestParam("file")MultipartFile files[])
     {
@@ -23,8 +27,8 @@ public class FileController {
         {
 
             String fileName = files[i].getOriginalFilename();  // 文件名
-            String path = "E:\\pigposter\\pp\\src\\main\\resources\\static\\img"+'\\'+ fileName;
-            File dest = new File(path);
+            String path = "\\img\\"+ fileName;
+            File dest = new File("E:\\pigposter\\pp\\src\\main\\resources\\static"+path);
             if (!dest.getParentFile().exists()) {
                 dest.getParentFile().mkdirs();
             }

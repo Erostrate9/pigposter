@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src = "/js/jquery-3.4.1.min.js"></script>
     <title>PigPoster-首页</title>
     <style>
         @font-face {
@@ -113,7 +114,7 @@
             margin-top: 13px;
         }
         .editFrame{
-            height: 119px;
+            height: 200px;
             width: 405px;
             border-style: solid;
             border-radius: 12px;
@@ -133,19 +134,19 @@
             border-style: hidden;
         }
     </style>
-    <link rel="stylesheet" href="../static/css/layui.css" media="all">
+    <link rel="stylesheet" href="/css/layui.css" media="all">
 </head>
 <body id="abc">
     <div class="bar">
-        <img src="../static/icon/pigposter.svg" width="117px" height="36px" style="position: relative;left:10%;display: inline"/>
+        <img src="/img/pigposter.svg" width="117px" height="36px" style="position: relative;left:10%;display: inline"/>
         <div style="background: #FAFAFA;width: 142px;height: 19px;text-align: center;border-style: solid;border-color: #EAEAEA;border-radius: 2px;border-width:1px;display: inline-block;position: absolute;left:40%;bottom: 20%;">
-            <img src="../static/icon/搜索.svg" style="width: 11px;height: 11px;position: relative;margin: 0 auto;">
+            <img src="/icon/搜索.svg" style="width: 11px;height: 11px;position: relative;margin: 0 auto;">
             <input style="background: #FAFAFA;width: 119px;height: 13px;position:relative;margin: 0 auto;display: inline;border-style: hidden;font-family: msyh;font-size: 10px;line-height: 0" id="srch" PLACEHOLDER="搜索">
         </div>
         <div style="width: 92px;height: 19px;border-style: hidden;text-align: center;position: absolute;right:10%;bottom: 20%;display: inline-block">
-            <a href="http://www.baidu.com" target="_parent"><img src="../static/icon/首页.svg" class="icon"></a>
-            <a href="http://www.baidu.com" target="_parent"><img src="../static/icon/热门.svg"  class="icon"></a>
-            <img src="../static/icon/消息.svg"  class="icon">
+            <a href="http://www.baidu.com" target="_parent"><img src="/icon/首页.svg" class="icon"></a>
+            <a href="http://www.baidu.com" target="_parent"><img src="/icon/热门.svg"  class="icon"></a>
+            <img src="/icon/消息.svg"  class="icon">
             <a href="http://www.baidu.com" target="_parent"><div class="avatarFrame"><img src="../static/pic/me.jpg"  class="avatar" id="myAvatar"></div></a>
         </div>
     </div>
@@ -154,21 +155,21 @@
         <div class="poster">
             <div class="author">
                 <div class="avatarFrame" style="height: 26px;width: 26px;border-radius:13px;margin-left: 13px;margin-top: 8px;">
-                    <img src="../static/pic/me.jpg" class="avatar" style="width: 26px">
+                    <img src="/pic/me.jpg" class="avatar" style="width: 26px">
                 </div>
                 <div class="username" id="username">username</div>
             </div>
             <div class="layui-carousel" id="test1">
-                <div carousel-item>
-                    <div class="picFrame"><img src="../static/pic/asuka.png" class="pic"></div>
+                <div carousel-item = "0">
+                    <div class="picFrame"><img src="/pic/asuka.png" class="pic"></div>
                     <div><iframe src="//player.bilibili.com/player.html?bvid=BV1u54y1L7DJ&page=1&danmaku=0" allowfullscreen="allowfullscreen" width="407px" height="303px" scrolling="yes" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe></div>
                 </div>
             </div>
 <!--            <div class="picFrame"><img src="../static/pic/asuka.png" class="pic"></div>-->
 <!--            <div><iframe src="//player.bilibili.com/player.html?bvid=BV1u54y1L7DJ&page=1&danmaku=0" allowfullscreen="allowfullscreen" width="407px" height="225px" scrolling="yes" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe></div>-->
             <div style="display: inline-block;margin-left: 13px">
-                <img src="../static/icon/喜欢.svg" class="icon">
-                <img src="../static/icon/详情.svg" class="icon">
+                <img src="/icon/喜欢.svg" class="icon">
+                <img src="/icon/详情.svg" class="icon">
             </div>
             <div style="font-size:10px;margin-left: 13px;color:#333333;" id="likeNum">0个赞</div>
             <div style="width:377px;font-size:9px;color:#2D2D2D;margin-top:3px;margin-left: 13px;">配文是次要的，重点在于图片，这才是图片社交平台的精髓。配文在视觉呈现上处于次要地位</div>
@@ -177,19 +178,187 @@
     </div>
     <div class="editFrame">
         <div style="border-style: hidden;font-size: 12px;font-weight: bold;position: absolute;margin-left: 11px;margin-top:10px ">编辑分享</div>
-        <div style="margin-top: 36px;width:405px;height:83px;border-style:solid;border-width:1px;border-color: #F1F5F6;position: relative">
+        <div style="margin-top: 36px;width:405px;height:183px;border-style:solid;border-width:1px;border-color: #F1F5F6;position: relative">
             <div style="display: block">
-                <a href="http://www.baidu.com" target="_parent" id="myZone"><div class="avatarFrame" style="width: 35px;height: 35px;border-radius: 17px;margin-left: 12px;margin-top: 8px;display: inline-block"><img src="../static/pic/me.jpg"  class="avatar" style="width: 35px"></div></a>
-                <textarea style="margin-left: 5px;position: absolute;display: inline-block;resize: none;" placeholder="介绍下你的分享？"></textarea>
+                <a  target="_parent" id="myZone"><div class="avatarFrame" style="width: 35px;height: 35px;border-radius: 17px;margin-left: 12px;margin-top: 8px;display: inline-block"><img src="../static/pic/me.jpg"  class="avatar" style="width: 35px"></div></a>
+                <textarea id ="textt" style="margin-left: 5px;position: absolute;display: inline-block;resize: none;" placeholder="介绍下你的分享？"></textarea>
             </div>
             <div style="display: block;margin-left: 50px;margin-top: 13px;position: absolute">
-                <img src="../static/icon/喜欢.svg" class="icon">
-                <img src="../static/icon/详情.svg" class="icon">
-                <button class="btn" style="display: inline-block;position: absolute;margin-left:250px;padding-top:0px" id="btn_send" onclick="send()">发送</button>
+                
+                <input id = "tags" style="border-style: hidden;" placeholder="请加输入标签"></input>
+                <!-- <button class="btn" style="display: inline-block;position: absolute;margin-left:80px;padding-top:0px" id="btn_send" onclick="send()">发送</button> -->
+            </div>
+            <div style="display: block;margin-left: 50px;margin-top: 39px;position: absolute">
+                
+                <form method = "POST" id="form" enctype="multipart/form-data" action="/file/upload">
+                    <input id = "filee" type = "file"multiple="multiple"/>
+                    <input type="button" value="上传" hidden = "true"/>
+                </form>
+                <!-- <input id = "tags" style="border-style: hidden;" placeholder="请加输入标签"></input>
+                <button class="btn" style="display: inline-block;position: absolute;margin-left:80px;padding-top:0px" id="btn_send" onclick="send()">发送</button> -->
+            </div>
+            <div style="display: block;margin-left: 50px;margin-top: 64px;position: absolute">
+                <input id = "tags" style="border-style: hidden;" placeholder="嵌入HTML（b站only）"></input>
+                <button class="btn" style="display: inline-block;position: absolute;margin-left:80px;padding-top:0px" id="btn_send" onclick="send()">发送</button>
             </div>
         </div>
     </div>
-    <script src="../static/js/layui.js"></script>
+    <script src="/js/layui.js"></script>
+    <script>
+        $.ajax({
+        url: "/user/profile",
+        type: "get",
+        data:{
+        },
+        success:function (data) {
+            console.log(data);
+            path = data['user']['avatar']['path'];
+            $(".avatar").attr('src',path);
+            $("#myZone").attr('href',"/route/space?username="+data['user']['username']);
+        }
+        })
+        $.ajax({
+        url: "/i/myview",
+        type: "get",
+        data:{
+        },
+        success:function (data) {
+            console.log(data);
+            showList(data);
+        }
+        })
+        function showList(data)
+        {
+            
+            for(i in data)
+            {
+                var media,comment,like;
+                $.ajax({
+                url: "/i/getmedia",
+                type: "get",
+                
+                async : false,
+                data:{
+                    "pid":data[i].id
+                },
+                success:function (data) {
+                    console.log(data);
+                    media = data;
+                }})
+                $.ajax({
+                url: "/i/getcomment",
+                type: "get",
+                async : false,
+                data:{
+
+                    "pid":data[i].id
+                },
+                success:function (data) {
+                    console.log(data);
+                    comment = data;
+                }})
+                $.ajax({
+                url: "/i/getlike",
+                type: "get",  
+                async : false,
+                data:{
+                    "pid":data[i].id
+                },
+                success:function (data) {
+                    console.log(data);
+                    like = data;
+                }})
+                
+                var poster = document.createElement("div");
+                poster.className="poster";
+                poster.style.marginTop="10px";
+                var author =  document.createElement("div");
+                author.className="author";
+                var Frame =  document.createElement("div");
+                Frame.className = "avatarFrame";
+                Frame.style = "height: 26px;width: 26px;border-radius:13px;margin-left: 13px;margin-top: 8px;";
+                var avatar = document.createElement("img");
+                avatar.className="avatar";
+                avatar.src=data[i].user.avatar.path;
+                avatar.style = "width: 26px";
+                Frame.appendChild(avatar);
+                author.appendChild(Frame);
+                var username = document.createElement("div");
+                username.className = "username";
+                username.innerHTML = data[i].user.email;
+                author.appendChild(username);
+                poster.appendChild(author);
+                var car = document.createElement("div");
+                car.className = "layui-carousel";
+                car.id = "car"+i;
+                var item = document.createElement("div")
+                item.setAttribute("carousel-item",0);
+                for(j in media)
+                {
+                    
+                    console.log("holyshit");    
+                    var f = document.createElement("div");
+                    console.log(media[j].path.slice(-3))
+                    if(media[j].path.slice(-3) != "mp4")
+                    {
+
+                    
+                    f.className = "picFrame";
+                    var img = document.createElement("img");
+                    }
+                    //img.className = "pic"
+                    else 
+                    {var img = document.createElement("video");
+                    img.style.width="407px";
+                    img.loop ="loop";
+                    img.autoplay="autoplay"}
+                    img.src = media[j].path;
+                    f.appendChild(img);
+                    item.appendChild(f);
+                }
+                car.appendChild(item);
+                poster.appendChild(car);
+                var lk = document.createElement("div");
+                lk.style = "font-size:10px;margin-left: 13px;color:#333333;";
+                if(like == null)  lk.innerHTML ="0个赞";
+                else 
+                lk.innerHTML = like.length + "个赞";
+                poster.appendChild(lk);
+                lk = document.createElement("div");
+                lk.style = "width:377px;font-size:9px;color:#2D2D2D;margin-top:3px;margin-left: 13px;"
+                lk.innerHTML = data[i].text
+                poster.appendChild(lk);
+                lk = document.createElement("div");
+                lk.style = "font-size:9px;margin-top:8px;margin-left: 13px;color:#636363;font-weight: lighter"
+                if(comment == null) lk.innerHTML = "没有评论";
+                else 
+                lk.innerHTML = comment.length + "个评论";
+                poster.appendChild(lk);
+                document.getElementById("timeline").appendChild(poster);
+            }
+            var carousel = [];
+            layui.use('carousel', function(){
+                for(i in data)
+                {
+
+                
+            carousel[i] = layui.carousel;
+            //建造实例
+            var s= '#car'+i
+            console.log(s)
+            // s="test1"
+            carousel[i].render({
+                elem: s
+                ,interval:'5000'
+                ,height:'280px'
+                ,width: '407px' //设置容器宽度
+                ,arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });}
+        });
+        }
+    </script>
+    
 <!--    <style src="../static/css/layui.css"></style>-->
     <script>
         layui.use('carousel', function(){
@@ -210,6 +379,55 @@
         {
             document.getElementById("btn_send").style.background="#B2DFFC";
             setTimeout(function (){document.getElementById("btn_send").style.background="#0095f6";},100);
+            var s = $("#tags").val();
+            s = s.split("#");
+            var ans = ""
+            for(i in s)
+            {
+                if(i == 0)
+                ans = ans + s[i];
+                else
+                ans = ans + "," + s[i];
+            }
+            var dd = new FormData();
+            // dd.append('file', $('#filee')[0].files[0]);
+            files = document.getElementById("filee").files
+            for(i in files)
+            {
+                dd.append('file',files[i])
+            }
+            console.log(dd.file);
+            $.ajax({
+            url: "/file/upload",
+            type: "post",
+            data:dd,
+            processData:false,
+            contentType: false,
+            success:function (data) {
+                console.log(data);
+                ans2 = "";
+                for(i in data)
+                {
+                    if(i==0)
+                    ans2 = ans2 + data[i];
+                    else
+                    ans2 = ans2+","+data[i];
+                }
+                $.ajax({
+                url: "/post/add",
+                type: "post",
+                data:{
+                    "text" : $("#textt").val(),
+                    "tags":ans,
+                    "media":ans2
+                },
+                success:function (data) {
+                    console.log(data);
+                    window.location.reload();
+                }
+                })
+            }
+            })
 
         }
     </script>
